@@ -1,92 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Joshua Pro CRT Detector</title>
+  <title>Joshua Institutional SMC Bot</title>
   <script src="https://s3.tradingview.com/tv.js"></script>
+
   <style>
     body {
       margin: 0;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background: #0d1117;
       color: white;
+      text-align: center;
     }
+
     header {
       background: #161b22;
       padding: 15px;
-      text-align: center;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
     }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+    .section {
+      background: #161b22;
+      margin: 15px auto;
+      padding: 15px;
+      width: 92%;
+      border-radius: 8px;
     }
+
+    select, button {
+      padding: 8px;
+      margin: 6px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    .result {
+      font-size: 20px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
     .chart {
       width: 95%;
-      margin-top: 20px;
-    }
-    .info {
-      background: #161b22;
-      margin: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      width: 90%;
-    }
-    .level {
-      margin: 8px 0;
-      font-size: 16px;
+      margin: 20px auto;
     }
   </style>
 </head>
+
 <body>
 
 <header>
-🔥 Joshua Forex | Gold | Synthetic CRT Detector
+🔥 Joshua Institutional SMC Top-Down Detector
 </header>
 
-<div class="container">
-
-<div class="chart" id="main_chart"></div>
-
-<div class="chart" id="smt_chart"></div>
-
-<div class="info">
-  <h3>CRT Model Rules</h3>
-  <div class="level">✔ Session Range: 00:00 - 06:00</div>
-  <div class="level">✔ Trend: EMA 50 Alignment</div>
-  <div class="level">✔ Key POI: 50% Equilibrium</div>
-  <div class="level">✔ SMT Divergence Confirmation</div>
-  <div class="level">✔ Model 1 Entry at 50%</div>
+<div class="section">
+  <h3>Select Pair</h3>
+  <select id="pair" onchange="loadChart()">
+    <option value="OANDA:EURUSD">EURUSD</option>
+    <option value="OANDA:GBPUSD">GBPUSD</option>
+    <option value="OANDA:GBPJPY">GBPJPY</option>
+    <option value="OANDA:USDJPY">USDJPY</option>
+    <option value="OANDA:AUDUSD">AUDUSD</option>
+    <option value="OANDA:EURNZD">EURNZD</option>
+    <option value="OANDA:CADJPY">CADJPY</option>
+    <option value="OANDA:USDCAD">USDCAD</option>
+    <option value="OANDA:CHFJPY">CHFJPY</option>
+  </select>
 </div>
 
+<div class="chart" id="chart"></div>
+
+<!-- 1️⃣ ECONOMICS + COT -->
+
+<div class="section">
+  <h3>1️⃣ COT Positioning Bias</h3>
+  <select id="cot">
+    <option value="none">Select COT Bias</option>
+    <option value="bullish">Institutional Long</option>
+    <option value="bearish">Institutional Short</option>
+  </select>
 </div>
 
-<script>
-// MAIN PAIR (Change anytime)
-new TradingView.widget({
-  "width": "100%",
-  "height": 500,
-  "symbol": "OANDA:XAUUSD",
-  "interval": "15",
-  "timezone": "Etc/UTC",
-  "theme": "dark",
-  "style": "1",
-  "container_id": "main_chart"
-});
-
-// SMT PAIR
-new TradingView.widget({
-  "width": "100%",
-  "height": 400,
-  "symbol": "OANDA:EURUSD",
-  "interval": "15",
-  "timezone": "Etc/UTC",
-  "theme": "dark",
-  "style": "1",
-  "container_id": "smt_chart"
-});
-</script>
-
-</body>
-</html>
+<div class="section">
+  <h3>2️⃣ Key Fundamental Drivers</h3>
+  <select id="fundamental">
+    <option value="none">Select Macro Direction</option>
+    <option value="bullish">
